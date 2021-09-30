@@ -100,12 +100,12 @@ def plotly_app_bootstrap(context, name=None, slug=None, da=None, aspect="4by3", 
 @register.simple_tag(takes_context=True)
 def plotly_header(context):
     'Insert placeholder for django-plotly-dash header content'
-    return context.request.dpd_content_handler.header_placeholder
+    return context['request'].dpd_content_handler.header_placeholder
 
 @register.simple_tag(takes_context=True)
 def plotly_footer(context):
     'Insert placeholder for django-plotly-dash footer content'
-    return context.request.dpd_content_handler.footer_placeholder
+    return context['request'].dpd_content_handler.footer_placeholder
 
 @register.inclusion_tag("django_plotly_dash/plotly_direct.html", takes_context=True)
 def plotly_direct(context, name=None, slug=None, da=None):
@@ -116,7 +116,7 @@ def plotly_direct(context, name=None, slug=None, da=None):
     view_func = app.locate_endpoint_function()
 
     # Load embedded holder inserted by middleware
-    eh = context.request.dpd_content_handler.embedded_holder
+    eh = context['request'].dpd_content_handler.embedded_holder
 
     # Need to add in renderer launcher
     renderer_launcher = '<script id="_dash-renderer" type="application/javascript">var renderer = new DashRenderer();</script>'
@@ -161,5 +161,5 @@ def plotly_class(name=None, slug=None, da=None, prefix=None, postfix=None, templ
 @register.simple_tag(takes_context=True)
 def site_root_url(context):
     'Provide the root url of the demo site'
-    current_site_url = get_current_site(context.request)
+    current_site_url = get_current_site(context['request'])
     return current_site_url.domain
