@@ -83,7 +83,10 @@ def find_stateless_by_name(name):
 
     dash_app = get_stateless_by_name(name)
     dsa_app = StatelessApp(app_name=name)
-    dsa_app.save()
+    try:
+        dsa_app.save()
+    except:
+        pass
     return dash_app
 
 

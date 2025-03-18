@@ -104,3 +104,4 @@ ENV/
 
 # testing
 .pytest_cache/
+.DS_Store

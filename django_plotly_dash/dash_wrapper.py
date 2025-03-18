@@ -28,6 +28,7 @@ import inspect
 import itertools
 import json
 import warnings
+import logging
 from typing import Dict, List, Callable
 
 import dash
@@ -116,6 +117,7 @@ def get_local_stateless_by_name(name):
     '''
     Locate a registered dash app by name, and return a DjangoDash instance encapsulating the app.
     '''
+    logging.error(f"usable_apps = {usable_apps}")
     sa = usable_apps.get(name, None)
 
     if not sa:
@@ -164,6 +166,7 @@ class DjangoDash:
         self.external_stylesheets = external_stylesheets or []
         self.external_scripts = external_scripts or []
         self._kwargs = kwargs
+
         if kwargs:
             warnings.warn("You are passing extra arguments {kwargs} that will be passed to Dash(...) "
                           "but may not be properly handled by django-plotly-dash.".format(kwargs=kwargs))

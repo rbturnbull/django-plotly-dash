@@ -58,6 +58,7 @@ def dependencies(request, ident, stateless=False, **kwargs):
 
 def layout(request, ident, stateless=False, cache_id=None, **kwargs):
     'Return the layout of the dash application'
+
     _, app = DashApp.locate_item(ident, stateless)
 
     view_func = app.locate_endpoint_function('dash-layout')
